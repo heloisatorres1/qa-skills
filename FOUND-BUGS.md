@@ -1,6 +1,6 @@
 # Bugs found by these skills
 
-Real bugs that `test-game-full` and `full-playthrough` found in my game [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm) (v1.0.0, commit `db96df5`). Every one was reproduced at least twice from a clean state, and each has a video, screenshots, before/after save data and the line of code involved.
+Real bugs that `test-game-full`, `full-playthrough` and `root-cause-analysis` found in my game [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm) (v1.0.0, commit `db96df5`). Every one was reproduced at least twice from a clean state, and each has a video, screenshots, before/after save data and the line of code involved.
 
 | ID | Severity | Bug | Reproduced | Video | Status |
 |---|---|---|---|---|---|
@@ -9,6 +9,7 @@ Real bugs that `test-game-full` and `full-playthrough` found in my game [Pixel S
 | [BUG-003](#bug-003-the-store-sells-no-ads-again-to-players-who-own-it) | Major | The store sells No Ads again to players who own it | 4/4 | [purchase](examples/pixel-swarm-full/test-store/evidence/ST-08-run1.webm) | Open |
 | [BUG-008](#bug-008-player-xp-never-grows-the-player-stays-level-1-forever) | Major | Player XP never grows: the player stays level 1 forever (found by the 102-level playthrough) | 2/2 | [after 102 wins](examples/pixel-swarm-playthrough/evidence/BUG-008-after-102-wins.webm) | Open |
 | [BUG-004](#bug-004-add-slot-from-out-of-slots-has-no-limit) | Minor | Add Slot from Out of Slots has no limit | 5/5 | [6 x Add Slot](examples/pixel-swarm-full/test-puzzles/evidence/PZ-35-run1-add-slot.webm) | Open |
+| [BUG-009](#bug-009-free-coins-pays-again-when-enter-or-space-is-pressed-during-the-ad) | Minor | Free Coins pays again when Enter or Space is pressed during the ad (found by `root-cause-analysis`) | 2/2 | [screenshot](examples/root-cause-analysis/4-free-coins-extra-rewards/evidence/run1-C-keyboard-repeat.png) | Open |
 
 All bugs are **open**: they are reported, not fixed in the game yet. Three smaller ones (BUG-005 to BUG-007) are in the [examples index](examples/README.md#bugs-found).
 
@@ -121,3 +122,24 @@ Evidence: [video](examples/pixel-swarm-full/test-puzzles/evidence/PZ-35-run1-add
 **Fix:** add XP per win in `track('level')`, and level up when `xp >= xpToNext` (grow `xpToNext`, pay the reward, show a toast).
 
 Evidence: [video](examples/pixel-swarm-playthrough/evidence/BUG-008-after-102-wins.webm) · [save after 102 wins and after 1-3 wins](examples/pixel-swarm-playthrough/evidence/BUG-008-state.json) · [completion report](examples/pixel-swarm-playthrough/completion-report.html) · [test script](examples/pixel-swarm-playthrough/scripts/xp-check.mjs)
+
+---
+
+## BUG-009: Free Coins pays again when Enter or Space is pressed during the ad
+
+![BUG-009: 600 coins after one Watch click and 5 Enter presses](examples/root-cause-analysis/4-free-coins-extra-rewards/evidence/run1-C-keyboard-repeat.png)
+
+**Minor** · Found by `root-cause-analysis`, starting from a vague player report ("I got Free Coins 6 times today") · Reproduced 2/2 · Web, Edge, keyboard
+
+**Steps**
+1. Open the Store with 0 Free Coins used today.
+2. Click **Watch** on Free Coins.
+3. While the 3 s ad plays, press Enter (or Space) 5 times.
+
+**Expected:** one ad pays once; at most 5 rewards a day.
+**Actual:** 6 rewards (600 coins) from one ad, and the Store says "0 left today". Slow mouse clicks stop at 5 and a mouse double-click pays once, so mouse testing never shows it.
+
+**Cause:** the daily limit is checked when Watch is pressed (`js/app.js:442`), but the use is only counted when the ad ends, 3 s later. `showAd` (`js/app.js:418`) never checks whether an ad is already playing. The ad overlay blocks the mouse, but keyboard focus stays on the Watch button.
+**Fix:** in `showAd`, return at once if the ad overlay is already showing (1 line, proven: 6 rewards before, 1 after). The same guard protects the other rewarded ads (x2 win reward, extra slot), which were read in the code but not run.
+
+Evidence: [root cause report](examples/root-cause-analysis/4-free-coins-extra-rewards/rca.md) · [run 1](examples/root-cause-analysis/4-free-coins-extra-rewards/repro/run1.txt) · [run 2](examples/root-cause-analysis/4-free-coins-extra-rewards/repro/run2.txt) · [fix](examples/root-cause-analysis/4-free-coins-extra-rewards/proof/fix.diff) · [regression test](examples/root-cause-analysis/4-free-coins-extra-rewards/proof/regression-test.mjs)

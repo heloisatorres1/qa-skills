@@ -1,0 +1,3 @@
+FAIL first load: screen says "Levels won: 0" (expected 12); saved stats = {"levels":0,"firstTry":0,"perfect":0,"hard":0,"pixels":0,"boosters":0,"coinsEarned":0,"daily":0,"eventWins":0}
+FAIL after F5: screen says "Levels won: 0" (expected 12); saved stats = {"levels":0,"firstTry":0,"perfect":0,"hard":0,"pixels":0,"boosters":0,"coinsEarned":0,"daily":0,"eventWins":0}
+RESULT: FAIL - achievements were reset to the defaults

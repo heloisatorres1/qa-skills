@@ -1,0 +1,10 @@
+--- a/js/app.js	2026-11-24 17:19:57.039560800 -0300
++++ b/js/app.js	2026-11-24 17:19:57.077588900 -0300
+@@ -417,6 +417,7 @@
+ 
+   function showAd(onReward) {
+     const el = $('ad-overlay'), ad = nextHouseAd();
++    if (!el.hidden) return; // an ad is already playing: ignore a second request (Enter/Space on the still-focused button)
+     $('ad-card').innerHTML = `<img src="${ad.art}" alt=""><h3>${ad.title}</h3><p>${ad.text}</p>`;
+     let n = AD_SECONDS;
+     $('ad-count').textContent = n;

@@ -3,6 +3,7 @@
 QA skills for [Claude Code](https://claude.com/claude-code), written by a QA lead. They hold the agent to the rules a QA lead holds human testers to.
 
 - **[`test-design`](skills/test-design/SKILL.md)** reads a website, app, game, source code or a spec. It suggests test cases (happy path, negative path, edge cases), what to automate, a CI/CD plan and the tools. You approve before anything is built. It works for any software and is strongest on the web. [Examples](#example-test-design-on-saucedemo-and-pixel-swarm).
+- **[`root-cause-analysis`](skills/root-cause-analysis/SKILL.md)** takes one bug report and returns the line of code that causes it, a fix **proven** in a copy of the project (bug gone with the fix, back without it), everything else the same cause breaks, and a regression test. Tested on 5 bugs: **60/60 with the skill, 46/60 without**. [Results](examples/root-cause-analysis/results.md).
 - **The game skills** find problems in any engine **and prove them** with screenshots, state reads, logs and `file:line` references. They then write a report a developer or producer can act on. Unity, Godot, Unreal, web, desktop or mobile: they only need a playable build, the source, or both.
 
 ![Generated QA report for Pixel Swarm](docs/report-preview.png)
@@ -20,8 +21,9 @@ Run on my own game, [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm)
 | [BUG-003](FOUND-BUGS.md#bug-003-the-store-sells-no-ads-again-to-players-who-own-it) | The store sells the $4.99 offer with No Ads to players who already own No Ads | Major | 4/4 |
 | [BUG-008](FOUND-BUGS.md#bug-008-player-xp-never-grows-the-player-stays-level-1-forever) | Player XP never grows: after 102 wins the player is still level 1, so level-gated content stays locked (found by the full playthrough) | Major | 2/2 |
 | [BUG-004](FOUND-BUGS.md#bug-004-add-slot-from-out-of-slots-has-no-limit) | Add Slot from Out of Slots has no limit: 10 squeezed slots (the booster stops at 7) | Minor | 5/5 |
+| [BUG-009](FOUND-BUGS.md#bug-009-free-coins-pays-again-when-enter-or-space-is-pressed-during-the-ad) | Free Coins pays again when Enter or Space is pressed during the ad: 6 rewards from one ad (found by `root-cause-analysis` from a vague player report) | Minor | 2/2 |
 
-All of them are open (reported, not fixed yet). The [examples index](examples/README.md) lists every run and all 8 bugs, including the minor ones.
+All of them are open (reported, not fixed yet). The [examples index](examples/README.md) lists every run and all 9 bugs, including the minor ones.
 
 ![BUG-001 storyboard](docs/bugs/BUG-001.png)
 
@@ -41,6 +43,7 @@ The report builder enforces these rules: it refuses a `findings.json` with a "co
 | Skill | What it does | Proven on |
 |---|---|---|
 | [`test-design`](skills/test-design/SKILL.md) | Reads a site, app, game, code or document and suggests test cases with named techniques (equivalence partitioning, boundary values, decision tables, state transitions), each with a source, a risk priority and an automation level. Adds an automation plan: CI/CD stages and tool options such as Allure. **Suggests only.** It builds starter tests and a CI file after you approve the cases and pick the tools, and proves them (3 runs in a row, plus one deliberate failure). A checker refuses vague or unsourced cases. | **SauceDemo** (site only): 54 cases, 12 questions. 13 approved tests: 11 passed 3/3, 2 failed 4/4 on real product faults. [Example](examples/saucedemo-test-design/README.md) · **Pixel Swarm** (code + build): 31 cases that cover 4 of the 5 main known bugs. [Example](examples/pixel-swarm-test-design/README.md) |
+| [`root-cause-analysis`](skills/root-cause-analysis/SKILL.md) | Takes one bug (a report, a finding from another skill, or a short description) and finds its root cause: the exact `file:line`, the chain from cause to symptom, proof that switching the cause off removes the bug and switching it back on brings it back, the blast radius, why it slipped through, the fix and a regression test that fails before the fix and passes after. Every claim carries a confidence level (Confirmed, Likely, Unproven, Not reproduced). Works on a copy and never changes your project. A checker refuses a report without proof. | 5 bugs in Pixel Swarm and QA Workspace: **60/60 with the skill vs 46/60 without**. Found a new real bug ([BUG-009](FOUND-BUGS.md#bug-009-free-coins-pays-again-when-enter-or-space-is-pressed-during-the-ad)) from a vague player report. [Results](examples/root-cause-analysis/results.md) · [Benchmark](examples/root-cause-analysis/README.md) |
 | [`text-review`](skills/text-review/SKILL.md) | Pulls every player-facing string from any engine (HTML, JSON, CSV/PO/XLIFF tables, Android/iOS strings, Godot scenes, Unity YAML, string literals in code), checks spelling, grammar, terms, placeholders and plurals, then screenshots the text in the running game to catch overlap and truncation. | 861 strings checked, 0 spelling errors, 6 text issues (2 only visible in the game) and 3 queries. [Report](examples/pixel-swarm-text-review/report.md) |
 | [`full-playthrough`](skills/full-playthrough/SKILL.md) | Finishes the whole game: every level, theme, mode and ending. It builds a content inventory from the game data first, so locked or hidden content is not missed. It checks rewards and unlocks along the way, keeps a progress log it can resume from, and labels anything finished with cheats as `assisted`. | **102/102 levels** completed with real taps in 1 h 34 min (1 h 12 min of play), every reward and save checked. Found [BUG-008](FOUND-BUGS.md#bug-008-player-xp-never-grows-the-player-stays-level-1-forever). [Results](examples/pixel-swarm-playthrough/README.md) |
 | [`test-game-full`](skills/test-game-full/SKILL.md) | The test lead. Detects which features the game has, writes a test plan, runs a smoke gate, then runs the matching feature skills and merges their results into one report with a release verdict. | 80 checks in 8 modules, 7 bugs (3 major), verdict "not ready for a store release". [Summary](examples/pixel-swarm-full/summary.md) |
@@ -52,7 +55,7 @@ The report builder enforces these rules: it refuses a `findings.json` with a "co
 | [`test-performance`](skills/test-performance/SKILL.md) | Boot and load times, frame time and 1% lows, memory over long sessions, throttled runs. Every number is measured against a budget, with 3 runs and the raw data. | 4/4 budgets met: boot 3.1 s, 1% low 58 fps at 4× CPU throttle, memory stable. |
 | [`qa-evidence`](skills/qa-evidence/SKILL.md) | The shared standard all skills follow: how to reach the game, how to capture proof, statuses, severities and the `findings.json` format. Tools: the report builder (it enforces the rules), a Playwright harness that records **video without ffmpeg** and saves results crash-safe, and an evidence pruner. | Used by every run here: videos for every major bug, storyboards, and reports that refuse a bug without proof. |
 
-"Proven" means a real run: on my game [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm) v1.0.0, or on the public practice shop [SauceDemo](https://www.saucedemo.com/) for `test-design`. Every result is in [examples](examples/README.md) and every bug in [FOUND-BUGS.md](FOUND-BUGS.md).
+"Proven" means a real run: on my game [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm) v1.0.0, on the public practice shop [SauceDemo](https://www.saucedemo.com/) for `test-design`, or on Pixel Swarm and my web app [QA Workspace](https://github.com/heloisatorres1/qa-workspace) for `root-cause-analysis`. Every result is in [examples](examples/README.md) and every bug in [FOUND-BUGS.md](FOUND-BUGS.md).
 
 The full list of features `test-game-full` can cover, and how far an AI agent can go with each, is in the [feature catalog](skills/test-game-full/references/feature-catalog.md).
 
@@ -84,6 +87,25 @@ Each skill also works on its own. Start with `text-review`: it's the quickest to
 
 - **31 cases with code references.** Cases come from gaps between two places in the code, such as the slot limit that the Out of Slots path skips.
 - **4 of the 5 main known bugs covered.** This was not a blind test, as the example explains.
+
+## Example: root cause analysis on 5 bugs
+
+`root-cause-analysis` got 5 bug reports, written the way a tester files them: 3 bugs planted in copies of Pixel Swarm and QA Workspace, 1 real known bug (BUG-008), and 1 vague player report with no known answer. The same model ran each one without the skill and with it ([benchmark](examples/root-cause-analysis/README.md) · [results with code and fixes](examples/root-cause-analysis/results.md)):
+
+| | Without skill | With skill |
+|---|---|---|
+| Found the right file and line | 5/5 | 5/5 |
+| Ran the product to see the bug | 1/5 | 5/5 |
+| Proved the cause (fix on, then off) | 0/5 | 5/5 |
+| Wrote a regression test that fails, then passes | 0/5 | 5/5 |
+| Said why the bug slipped through | 0/5 | 5/5 |
+| **Score** | **46/60** | **60/60** |
+
+- **Finding the line is not the hard part.** The skill adds what a developer needs to trust it: proof, side effects and a test.
+- **It finds the damage around the bug.** For example, the achievements bug also saves the zeros, so players lose their stats for good. The fix alone does not bring them back.
+- **It turned "I got Free Coins 6 times today" into a proven bug** ([BUG-009](FOUND-BUGS.md#bug-009-free-coins-pays-again-when-enter-or-space-is-pressed-during-the-ad)). It also kept two claims apart: the mechanism is Confirmed, but "this is what the player did" is only Likely.
+- **It checks why the bug got through.** In the web app, 2 existing unit tests were already failing because of the bug.
+- **The trade-off is time:** 4 to 23 minutes per bug, against about 30 seconds without the skill.
 
 ## Example: full playthrough of Pixel Swarm (102/102 levels)
 
@@ -146,6 +168,8 @@ Proofread all the player-facing text in this project and show me proof in the ru
 /test-store
 Run a full QA pass on the build in ./Builds/WebGL, standard depth
 /full-playthrough https://mygame.itch.io  scope: main path
+/root-cause-analysis "Achievements reset to 0 after a refresh" ./my-game
+Find the root cause of BUG-004 in this project
 ```
 
 Every run writes to `qa-reports/<date>-<skill>/`:
@@ -156,6 +180,8 @@ evidence/       # screenshots, crops, state dumps, logs, save diffs
 report.md       # paste into Jira, GitHub or Slack
 report.html     # self-contained page (use --embed to inline the images)
 ```
+
+`root-cause-analysis` writes `qa-reports/<date>-rca-<bug>/rca.md` with `repro/`, `proof/` (the fix, the on/off runs, the regression test) and `evidence/`. Its checker is `node skills/root-cause-analysis/scripts/check-rca.mjs <run>/rca.md`.
 
 `test-design` writes `test-cases.json` (its source of truth), `test-cases.md`, `test-cases.csv`, `coverage.md`, `questions.md` and `automation-plan.md` instead. Its checker is `node skills/test-design/scripts/build-cases.mjs <run>/test-cases.json`.
 
@@ -175,6 +201,7 @@ These skills make an agent a disciplined tester. They do not replace one. An age
 .claude-plugin/        plugin + marketplace manifests
 skills/<name>/         SKILL.md, references/, scripts/
 examples/              real runs with evidence and reports (index: examples/README.md)
+  root-cause-analysis/       root-cause-analysis: 5 bugs with and without the skill, reports, proofs, tests
   saucedemo-test-design/     test-design: 54 cases, automation plan, 13 approved and proven Playwright tests
   pixel-swarm-test-design/   test-design from code: 31 cases, 6 questions, plan waiting for approval
   pixel-swarm-playthrough/   full-playthrough: 102/102 levels, completion report

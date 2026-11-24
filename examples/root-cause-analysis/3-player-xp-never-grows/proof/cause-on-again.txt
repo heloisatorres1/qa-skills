@@ -1,0 +1,5 @@
+LOCKED AVATAR (needs level 10) TOAST "Unlocks at player level 10"
+SAVE {"levelsWon":10,"playerLevel":1,"xp":1,"xpToNext":2}
+PROFILE UI {"xpText":"1/2","level":["1"],"fill":["50%"]}
+PAGE ERRORS []
+RESULT: BUG - 10 levels won, playerLevel=1, xp=1/2

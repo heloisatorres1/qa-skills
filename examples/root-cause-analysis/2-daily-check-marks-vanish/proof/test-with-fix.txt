@@ -1,0 +1,5 @@
+ok    fresh save, claimed today (streak 1)
+ok    streak 4 claimed today
+ok    day 7 claimed today (streak 7)
+ok    claimed yesterday, not yet today (streak 3)
+ok    missed a day (streak 3, last older)

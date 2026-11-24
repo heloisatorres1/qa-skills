@@ -1,0 +1,4 @@
+before-refresh (live, dev shortcut): Levels Won=12, First-Try Wins=7, Perfect Wins=5, Hard Wins=2, Pixels Eaten=4,321, Boosters Used=3, Coins Earned=560, Daily Rewards=4, Bugs Collected=1
+after-refresh Levels won: 0 | Levels Won=0, First-Try Wins=0, Perfect Wins=0, Hard Wins=0, Pixels Eaten=0, Boosters Used=0, Coins Earned=0, Daily Rewards=0, Bugs Collected=1
+after-refresh saved stats in localStorage: {"levels":0,"firstTry":0,"perfect":0,"hard":0,"pixels":0,"boosters":0,"coinsEarned":0,"daily":0,"eventWins":0} coins 900 gems 40 progress {"flowers-easy":[3,2,3]}
+page errors: none

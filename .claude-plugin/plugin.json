@@ -1,7 +1,7 @@
 {
   "name": "qa-skills",
-  "version": "0.2.0",
-  "description": "QA skills for Claude Code by a QA lead: test design (test cases, automation and CI/CD suggestions for web, software and games) plus engine-agnostic game QA (text review, full playthrough, a full test pass with feature modules). Every finding comes with evidence and a generated report.",
+  "version": "0.3.0",
+  "description": "QA skills for Claude Code by a QA lead: test design (test cases, automation and CI/CD suggestions for web, software and games), root cause analysis (one bug in, the proven cause, fix and regression test out) plus engine-agnostic game QA (text review, full playthrough, a full test pass with feature modules). Every finding comes with evidence and a generated report.",
   "author": {
     "name": "Heloisa Oller Torres",
     "url": "https://github.com/heloisatorres1"
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/heloisatorres1/qa-skills",
   "repository": "https://github.com/heloisatorres1/qa-skills",
   "license": "MIT",
-  "keywords": ["qa", "test-design", "test-cases", "test-automation", "ci-cd", "playwright", "game-testing", "playtesting", "localization", "bug-report", "skills"]
+  "keywords": ["qa", "test-design", "root-cause-analysis", "debugging", "test-cases", "test-automation", "ci-cd", "playwright", "game-testing", "playtesting", "localization", "bug-report", "skills"]
 }

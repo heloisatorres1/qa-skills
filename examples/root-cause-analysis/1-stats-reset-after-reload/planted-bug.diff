@@ -1,0 +1,13 @@
+diff --git a/js/app.js b/js/app.js
+index de8d23a..55bdff4 100644
+--- a/js/app.js
++++ b/js/app.js
+@@ -94,7 +94,7 @@
+     const saved = readSave(SAVE_KEY) || readSave(BACKUP_KEY); // main slot broken -> use the backup
+     if (saved) s = Object.assign(s, saved.data && saved.v ? saved.data : saved); // (older saves had no wrapper)
+     s.settings = Object.assign({}, DEFAULT_STATE.settings, s.settings);
+-    s.stats = Object.assign({}, DEFAULT_STATE.stats, s.stats);
++    s.stats = Object.assign({}, s.stats, DEFAULT_STATE.stats);
+     s.event = Object.assign({}, DEFAULT_STATE.event, s.event);
+     if (!s.playerId) s.playerId = makePlayerId();
+     return s;

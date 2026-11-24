@@ -1,0 +1,9 @@
+[bug1] release callout: 1 critical bug unresolved
+[bug1] Triage critical + default (Open + in progress) rows: [
+  'CP-109Save data rolls back after resuming an offline sessionCriticalP1OpenSam K.TSK-3109 · 7m a'
+]
+[bug1] Triage critical + Any status CP-104/109: [
+  'CP-106Greenhouse door won’t open after a network drop · duplicate of CP-104CriticalP1ClosedRile',
+  'CP-109Save data rolls back after resuming an offline sessionCriticalP1OpenSam K.TSK-3109 · 7m a',
+  'CP-104Player gets stuck in greenhouse after reconnectCriticalP1In progressAlex R.TSK-3104 · 7m '
+]

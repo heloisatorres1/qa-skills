@@ -1,0 +1,24 @@
+--- a/js/app.js	2026-11-24 17:29:11.153717300 -0300
++++ b/js/app.js	2026-11-24 17:29:11.202284600 -0300
+@@ -928,6 +928,7 @@
+       const pic = D.levelPicture(info.theme, info.diff, info.index);
+       if (!state.gallery.includes(pic)) state.gallery.push(pic);
+       state.stats.levels += 1;
++      addXp(1);                                        // each win gives 1 XP; filling the bar raises the player level
+       if (info.firstTry) state.stats.firstTry += 1;    // won on the very first attempt at that level
+       if (info.stars >= 3) state.stats.perfect += 1;
+       if (info.event) state.stats.eventWins += 1;
+@@ -937,6 +938,13 @@
+     if (kind === 'booster') { state.stats.boosters += 1; progressTask('boosters2'); }
+     saveState();
+   }
++  function addXp(n) {
++    state.xp += n;
++    while (state.xp >= state.xpToNext) {
++      state.xp -= state.xpToNext; state.playerLevel += 1;
++      state.coins += LEVEL_UP_REWARD; state.stats.coinsEarned += LEVEL_UP_REWARD;
++    }
++  }
+   window.PS_track = track; // used by the gameplay code
+ 
+   // =====================================================================

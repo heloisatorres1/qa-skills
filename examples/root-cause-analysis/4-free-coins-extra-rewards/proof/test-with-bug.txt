@@ -1,0 +1,4 @@
+FAIL: one Watch click plus 5 key presses during the ad must pay once, paid 6 times (600 coins)
+
+6 !== 1
+

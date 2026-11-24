@@ -1,0 +1,5 @@
+before-refresh Levels won: 12 | Levels Won=12, First-Try Wins=7, Perfect Wins=5, Hard Wins=2, Pixels Eaten=4,321, Boosters Used=3, Coins Earned=560, Daily Rewards=4, Bugs Collected=1
+before-refresh saved stats in localStorage: {"levels":12,"hard":2,"boosters":3,"daily":4,"coinsEarned":560,"firstTry":7,"perfect":5,"pixels":4321,"eventWins":1} coins 900 gems 40 progress {"flowers-easy":[3,2,3]}
+after-refresh Levels won: 12 | Levels Won=12, First-Try Wins=7, Perfect Wins=5, Hard Wins=2, Pixels Eaten=4,321, Boosters Used=3, Coins Earned=560, Daily Rewards=4, Bugs Collected=1
+after-refresh saved stats in localStorage: {"levels":12,"hard":2,"boosters":3,"daily":4,"coinsEarned":560,"firstTry":7,"perfect":5,"pixels":4321,"eventWins":1} coins 900 gems 40 progress {"flowers-easy":[3,2,3]}
+page errors: none

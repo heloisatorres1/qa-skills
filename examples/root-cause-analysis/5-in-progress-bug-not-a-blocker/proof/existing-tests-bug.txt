@@ -1,0 +1,40 @@
+
+  {
+-   "critical": 2,
+-   "high": 5,
++   "critical": 1,
++   "high": 4,
+    "low": 7,
+    "medium": 10,
+  }
+
+ ❯ tests/domain.test.ts:119:37
+    117|
+    118|   it('counts open bugs by severity and lists critical blockers', () =>…
+    119|     expect(evidence.openBySeverity).toEqual({ critical: 2, high: 5, me…
+       |                                     ^
+    120|     expect(evidence.blockers.map((b) => b.id)).toEqual(['CP-104', 'CP-…
+    121|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain.test.ts > release decisions > blocks "Ready" while critical bugs are open, and requires owners for accepted risks
+AssertionError: expected '1 critical bug is unresolved. “Ready”…' to match /critical bugs are unresolved/
+
+- Expected:
+/critical bugs are unresolved/
+
++ Received:
+"1 critical bug is unresolved. “Ready” is not available; accept the risks or hold."
+
+ ❯ tests/domain.test.ts:130:29
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  2 failed | 39 passed (41)
+   Start at  17:11:50
+   Duration  1.13s (environment 71%, setup 16%, transform 7%, tests 3%, import 2%, worker 1%)
+

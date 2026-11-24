@@ -1,0 +1,22 @@
+ ❯ tests/open-status.test.ts:12:31
+     10| describe('which findings count as unresolved', () => {
+     11|   it.each([['draft', false], ['open', true], ['in_progress', true], ['…
+     12|     expect(isOpen(f(status))).toBe(expected);
+       |                               ^
+     13|   });
+     14|
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+ FAIL  tests/open-status.test.ts > which findings count as unresolved > an in-progress critical bug is a release blocker
+AssertionError: expected [ 'CP-109' ] to include 'CP-104'
+ ❯ tests/open-status.test.ts:18:42
+     16|     const s = seed();
+     17|     const ev = captureEvidence([], s.findings, 'og', at);
+     18|     expect(ev.blockers.map((b) => b.id)).toContain('CP-104');
+       |                                          ^
+     19|   });
+     20| });
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  17:14:23
+   Duration  1.05s (environment 72%, setup 18%, transform 6%, import 2%, tests 1%, worker 1%)

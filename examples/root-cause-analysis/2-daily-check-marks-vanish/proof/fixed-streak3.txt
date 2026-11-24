@@ -1,0 +1,4 @@
+before claim: checks = 3 | button = Claim
+after claim: checks = 4 | button = Claimed | claimed cards = 4
+saved daily = [["pixelswarm.save.v1",{"streak":4,"last":"2026-11-24"}]]
+after reload+reopen: checks = 4 | button = Claimed

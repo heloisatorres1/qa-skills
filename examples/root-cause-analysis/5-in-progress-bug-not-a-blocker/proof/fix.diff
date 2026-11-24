@@ -1,0 +1,11 @@
+--- a/src/domain/findings.ts	2026-11-24 17:14:04.833383700 -0300
++++ b/src/domain/findings.ts	2026-11-24 17:14:04.853401300 -0300
+@@ -26,7 +26,7 @@
+   return e;
+ }
+ 
+-const OPEN_STATUSES: FindingStatus[] = ['open'];
++const OPEN_STATUSES: FindingStatus[] = ['open', 'in_progress'];
+ export const isOpen = (f: Finding) => OPEN_STATUSES.includes(f.status);
+ export const isAwaitingAnswer = (f: Finding) => f.type === 'question' && f.status !== 'draft' && !f.answer && f.status !== 'closed';
+ 

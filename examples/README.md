@@ -1,9 +1,10 @@
 # Examples
 
-Real runs of the skills. The game skills ran on my game [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm) (v1.0.0, commit `db96df5`) on 2026-11-16. `test-design` ran on the public practice shop [SauceDemo](https://www.saucedemo.com/) and on Pixel Swarm's code on 2026-11-19. Every result can be reproduced with the scripts in each folder.
+Real runs of the skills. The game skills ran on my game [Pixel Swarm](https://github.com/heloisatorres1/pixel-swarm) (v1.0.0, commit `db96df5`) on 2026-11-16. `test-design` ran on the public practice shop [SauceDemo](https://www.saucedemo.com/) and on Pixel Swarm's code on 2026-11-19. `root-cause-analysis` ran on 5 bugs in Pixel Swarm and [QA Workspace](https://github.com/heloisatorres1/qa-workspace) on 2026-11-24. Every result can be reproduced with the scripts in each folder.
 
 | Example | Skill | What it shows | Result |
 |---|---|---|---|
+| [`root-cause-analysis`](root-cause-analysis) | `root-cause-analysis` | 5 bug reports, each run without and with the skill: root cause, proof with the fix on and off, blast radius, regression test. [Results with code and fixes](root-cause-analysis/results.md) | **60/60 with the skill vs 46/60 without**; found BUG-009 |
 | [`saucedemo-test-design`](saucedemo-test-design) | `test-design` | Both phases on a live site with no code. Phase A writes cases, questions and an automation plan. Phase B builds and proves the approved tests | **54 cases, 12 questions; 13 Playwright tests**: 11 pass 3/3, 2 fail on real product faults |
 | [`pixel-swarm-test-design`](pixel-swarm-test-design) | `test-design` | Phase A from source code and the live build: cases traced to `file:line`, stopping for approval | **31 cases, 6 questions**; covers 4 of the 5 main known bugs (not a blind test) |
 | [`pixel-swarm-playthrough`](pixel-swarm-playthrough) | `full-playthrough` | Every level played with real taps, with rewards, stars, unlocks and saves checked after each one | **102/102 levels in 1 h 34 min** (1 h 12 min of play), 1 major bug (BUG-008) |
@@ -19,6 +20,7 @@ Real runs of the skills. The game skills ran on my game [Pixel Swarm](https://gi
 | BUG-003 | Major | The store sells the offer with No Ads to players who own No Ads | test-game-full | Open |
 | BUG-008 | Major | Player XP never grows: level-gated content can't be unlocked | full-playthrough | Open |
 | BUG-004 | Minor | Add Slot from Out of Slots has no limit | test-game-full | Open |
+| BUG-009 | Minor | Free Coins pays again when Enter or Space is pressed during the ad | root-cause-analysis | Open |
 | BUG-005 | Minor | Phone landscape (web): Levels/Play cover the Activities and Events buttons | test-game-full | Open |
 | BUG-006 | Minor | Buttons below the 44 px touch-target guideline | test-game-full | Open |
 | BUG-007 | Trivial | No favicon: a 404 in the console on every load | test-game-full | Open |

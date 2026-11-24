@@ -1,0 +1,13 @@
+diff --git a/js/app.js b/js/app.js
+index de8d23a..4025db0 100644
+--- a/js/app.js
++++ b/js/app.js
+@@ -455,7 +455,7 @@
+   function dailyInfo() {
+     const d = state.daily;
+     const claimedToday = d.last === today();
+-    const kept = claimedToday || d.last === yesterday();
++    const kept = d.last === yesterday();
+     const streak = kept ? d.streak : 0;
+     let shown = streak % 7;                       // how many of the 7 cards are checked
+     if (claimedToday && shown === 0 && streak > 0) shown = 7;

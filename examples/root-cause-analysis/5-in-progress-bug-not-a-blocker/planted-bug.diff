@@ -1,0 +1,20 @@
+diff --git a/src/domain/findings.ts b/src/domain/findings.ts
+index 25973b2..eb4394d 100644
+--- a/src/domain/findings.ts
++++ b/src/domain/findings.ts
+@@ -1,4 +1,4 @@
+-import type { Finding, FindingType, ID, ISODate } from './types';
++import type { Finding, FindingStatus, FindingType, ID, ISODate } from './types';
+ 
+ export type FieldErrors = Partial<Record<keyof Finding, string>>;
+ 
+@@ -26,7 +26,8 @@ export function validateForSubmit(f: Partial<Finding> & { type: FindingType }):
+   return e;
+ }
+ 
+-export const isOpen = (f: Finding) => f.status === 'open' || f.status === 'in_progress';
++const OPEN_STATUSES: FindingStatus[] = ['open'];
++export const isOpen = (f: Finding) => OPEN_STATUSES.includes(f.status);
+ export const isAwaitingAnswer = (f: Finding) => f.type === 'question' && f.status !== 'draft' && !f.answer && f.status !== 'closed';
+ 
+ export function answerQuestion(q: Finding, answer: string, at: ISODate): Finding {

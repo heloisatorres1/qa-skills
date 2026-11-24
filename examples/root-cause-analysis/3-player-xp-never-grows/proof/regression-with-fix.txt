@@ -1,0 +1,2 @@
+PASS: playerLevel=6 after 10 wins
+exit 0

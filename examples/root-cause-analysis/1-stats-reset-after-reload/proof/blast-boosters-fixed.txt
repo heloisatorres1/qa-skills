@@ -1,0 +1,1 @@
+blast-fixed boosters in level after load with 12 levels won: Add Slot [open] | Shuffle [open] | Wind (locked) [LOCKED] | Free Pick (locked) [LOCKED]

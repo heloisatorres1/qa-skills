@@ -1,0 +1,3 @@
+A-mouse-patient: before={"count":0,"coins":0,"label":"+100 coins · 5 left today"} after={"count":5,"coins":500,"label":"+100 coins · 0 left today"} rewards=5 (limit 5)
+B-mouse-dblclick: before={"count":0,"coins":0,"label":"+100 coins · 5 left today"} after={"count":4,"coins":400,"label":"+100 coins · 1 left today"} rewards=4 (limit 5)
+C-keyboard-repeat: before={"count":0,"coins":0,"label":"+100 coins · 5 left today"} after={"count":6,"coins":600,"label":"+100 coins · 0 left today"} rewards=6 (limit 5)

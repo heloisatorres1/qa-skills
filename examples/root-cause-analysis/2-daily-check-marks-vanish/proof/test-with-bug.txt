@@ -1,0 +1,5 @@
+FAIL  fresh save, claimed today (streak 1) -> shown cards = 0 , expected 1
+FAIL  streak 4 claimed today -> shown cards = 0 , expected 4
+FAIL  day 7 claimed today (streak 7) -> shown cards = 0 , expected 7
+ok    claimed yesterday, not yet today (streak 3)
+ok    missed a day (streak 3, last older)

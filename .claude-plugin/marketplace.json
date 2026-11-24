@@ -5,14 +5,14 @@
     "url": "https://github.com/heloisatorres1"
   },
   "metadata": {
-    "description": "QA skills for Claude Code by a QA lead: test design for web and software, and game QA."
+    "description": "QA skills for Claude Code by a QA lead: test design, root cause analysis and game QA."
   },
   "plugins": [
     {
       "name": "qa-skills",
       "source": "./",
-      "description": "test-design (test cases, automation and CI/CD suggestions, approved by you before anything is built) plus engine-agnostic game QA: text-review, full-playthrough, test-game-full and its feature modules, with evidence-backed reports.",
-      "version": "0.2.0",
+      "description": "test-design (test cases, automation and CI/CD suggestions, approved by you before anything is built), root-cause-analysis (finds and proves the cause of one bug, with a fix and a regression test) plus engine-agnostic game QA: text-review, full-playthrough, test-game-full and its feature modules, with evidence-backed reports.",
+      "version": "0.3.0",
       "category": "testing"
     }
   ]

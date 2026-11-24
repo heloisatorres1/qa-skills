@@ -1,0 +1,1 @@
+PASS: Free Coins paid 5 times, 500 coins
